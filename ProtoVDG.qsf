@@ -37,7 +37,7 @@
 
 
 set_global_assignment -name FAMILY MAX7000S
-set_global_assignment -name DEVICE "EPM7256SQC208-7"
+set_global_assignment -name DEVICE "EPM7128SLC84-10"
 set_global_assignment -name TOP_LEVEL_ENTITY ProtoVDG
 set_global_assignment -name ORIGINAL_QUARTUS_VERSION "13.0 SP1"
 set_global_assignment -name PROJECT_CREATION_TIME_DATE "20:06:17  JUNE 03, 2025"
@@ -51,21 +51,57 @@ set_global_assignment -name EDA_INPUT_DATA_FORMAT "VERILOG HDL" -section_id eda_
 set_global_assignment -name EDA_SIMULATION_TOOL "ModelSim (Verilog)"
 set_global_assignment -name EDA_TIME_SCALE "1 ps" -section_id eda_simulation
 set_global_assignment -name EDA_OUTPUT_DATA_FORMAT "VERILOG HDL" -section_id eda_simulation
-set_global_assignment -name SYSTEMVERILOG_FILE semiShift.sv
-set_global_assignment -name SYSTEMVERILOG_FILE rawSwitch.sv
-set_global_assignment -name SYSTEMVERILOG_FILE rawShift.sv
-set_global_assignment -name SYSTEMVERILOG_FILE ProtoVDG.sv
-set_global_assignment -name SYSTEMVERILOG_FILE colourMux.sv
-set_global_assignment -name SYSTEMVERILOG_FILE colourMap.sv
-set_global_assignment -name SYSTEMVERILOG_FILE colourMap2.sv
-set_global_assignment -name SYSTEMVERILOG_FILE colourMap4.sv
-set_global_assignment -name SYSTEMVERILOG_FILE colourMap2alpha.sv
-set_global_assignment -name SYSTEMVERILOG_FILE dataSwitch.sv
-set_global_assignment -name SYSTEMVERILOG_FILE alphaSwitch.sv
-set_global_assignment -name SYSTEMVERILOG_FILE alphaRom.sv
-set_global_assignment -name SYSTEMVERILOG_FILE semiSwitch.sv
-set_global_assignment -name SYSTEMVERILOG_FILE semi4Rom.sv
-set_global_assignment -name SYSTEMVERILOG_FILE semi6Rom.sv
 set_global_assignment -name OPTIMIZE_HOLD_TIMING OFF
 set_global_assignment -name OPTIMIZE_MULTI_CORNER_TIMING OFF
 set_global_assignment -name FITTER_EFFORT "STANDARD FIT"
+set_global_assignment -name DEVICE_FILTER_PACKAGE PLCC
+set_global_assignment -name VERILOG_FILE counter.v
+set_global_assignment -name VERILOG_FILE counterDbl.v
+set_global_assignment -name VERILOG_FILE FormatTiming.v
+set_global_assignment -name VERILOG_FILE FormatSelect.v
+set_global_assignment -name VERILOG_FILE DataSelectPath.v
+set_global_assignment -name VERILOG_FILE SemiSwitch.v
+set_global_assignment -name VERILOG_FILE Semi4Rom.v
+set_global_assignment -name VERILOG_FILE Semi6Rom.v
+set_global_assignment -name VERILOG_FILE ProtoVDG.v
+set_global_assignment -name VERILOG_FILE AlphaIntRom.v
+set_global_assignment -name VERILOG_FILE AlphaSwitch.v
+set_global_assignment -name VERILOG_FILE RawSwitch.v
+set_global_assignment -name VERILOG_FILE RawShift.v
+set_global_assignment -name VERILOG_FILE SemiShift.v
+set_global_assignment -name VERILOG_FILE ColourMap.v
+set_global_assignment -name VERILOG_FILE ColourMux.v
+set_global_assignment -name MAX7000_DEVICE_IO_STANDARD TTL
+set_location_assignment PIN_4 -to Inv
+set_location_assignment PIN_5 -to AnS
+set_location_assignment PIN_8 -to Data[0]
+set_location_assignment PIN_9 -to Data[1]
+set_location_assignment PIN_10 -to Data[2]
+set_location_assignment PIN_11 -to Data[3]
+set_location_assignment PIN_12 -to Data[4]
+set_location_assignment PIN_15 -to Data[5]
+set_location_assignment PIN_16 -to Data[6]
+set_location_assignment PIN_17 -to Data[7]
+set_location_assignment PIN_18 -to AnG
+set_location_assignment PIN_27 -to GM[0]
+set_location_assignment PIN_28 -to GM[1]
+set_location_assignment PIN_29 -to GM[2]
+set_location_assignment PIN_33 -to Clk
+set_location_assignment PIN_34 -to PALClk
+set_location_assignment PIN_46 -to RGB[6]
+set_location_assignment PIN_45 -to RGB[7]
+set_location_assignment PIN_44 -to RGB[8]
+set_location_assignment PIN_51 -to RGB[4]
+set_location_assignment PIN_50 -to RGB[5]
+set_location_assignment PIN_58 -to RGB[0]
+set_location_assignment PIN_57 -to RGB[1]
+set_location_assignment PIN_56 -to RGB[2]
+set_location_assignment PIN_68 -to OutputFormat
+set_location_assignment PIN_69 -to Format
+set_location_assignment PIN_74 -to ColourClock
+set_location_assignment PIN_75 -to FSn
+set_location_assignment PIN_76 -to HSn
+set_location_assignment PIN_20 -to Css
+set_location_assignment PIN_21 -to DA0
+set_location_assignment PIN_37 -to InE
+set_location_assignment PIN_52 -to RGB[3]

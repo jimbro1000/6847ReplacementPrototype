@@ -1,0 +1,9 @@
+{ "" "" "" "Net \"semiData.data_a\" at Semi4Rom.v(28) has no driver or initial value, using a default initial value '0'" {  } {  } 0 10030 "" 0 0 "Quartus II" 0 -1 0 ""}
+{ "" "" "" "Net \"semiData.waddr_a\" at Semi4Rom.v(28) has no driver or initial value, using a default initial value '0'" {  } {  } 0 10030 "" 0 0 "Quartus II" 0 -1 0 ""}
+{ "" "" "" "Net \"semiData.we_a\" at Semi4Rom.v(28) has no driver or initial value, using a default initial value '0'" {  } {  } 0 10030 "" 0 0 "Quartus II" 0 -1 0 ""}
+{ "" "" "" "Net \"semiData.data_a\" at Semi6Rom.v(29) has no driver or initial value, using a default initial value '0'" {  } {  } 0 10030 "" 0 0 "Quartus II" 0 -1 0 ""}
+{ "" "" "" "Net \"semiData.waddr_a\" at Semi6Rom.v(29) has no driver or initial value, using a default initial value '0'" {  } {  } 0 10030 "" 0 0 "Quartus II" 0 -1 0 ""}
+{ "" "" "" "Net \"semiData.we_a\" at Semi6Rom.v(29) has no driver or initial value, using a default initial value '0'" {  } {  } 0 10030 "" 0 0 "Quartus II" 0 -1 0 ""}
+{ "" "" "" "Net \"alphaData.data_a\" at AlphaIntRom.v(27) has no driver or initial value, using a default initial value '0'" {  } {  } 0 10030 "" 0 0 "Quartus II" 0 -1 0 ""}
+{ "" "" "" "Net \"alphaData.waddr_a\" at AlphaIntRom.v(27) has no driver or initial value, using a default initial value '0'" {  } {  } 0 10030 "" 0 0 "Quartus II" 0 -1 0 ""}
+{ "" "" "" "Net \"alphaData.we_a\" at AlphaIntRom.v(27) has no driver or initial value, using a default initial value '0'" {  } {  } 0 10030 "" 0 0 "Quartus II" 0 -1 0 ""}

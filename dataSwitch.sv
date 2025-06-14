@@ -41,8 +41,6 @@ module dataSwitch(
 	semiSwitch semi(
 		.inData (inData),
 		.row (row),
-//		.InE (InE),
-//		.css (css),
 	   .clk (clk),
 	   .divider (divider),
 	   .load (load),

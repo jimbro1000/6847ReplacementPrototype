@@ -31,21 +31,22 @@ module semiShift(
    reg [7:0] pixelData;
    logic pixel;
 	logic [3:0] pixelColour;
+	
+	assign pixel = pixelData[7];
     
-   initial begin
-      pixel = 0;
-   end
-    
-   always @(load, clk) begin
+   always @(load or clk or pixel) begin
 		if (load)
 			pixelData = inData;
-      pixel = pixelData[7];
-      pixelData = pixelData << 1;
+		else
+			pixelData = pixelData << 1;
+   end
+	
+	always @(pixel) begin
 		if (pixel)
 			pixelColour = colour;
 		else
 			pixelColour = 4'b0000;
-   end
+	end
     	 
    colourMux mux(
     	.colourIndex (pixelColour),

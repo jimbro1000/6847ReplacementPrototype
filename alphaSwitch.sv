@@ -9,9 +9,9 @@ module alphaSwitch(
 	output [8:0] rgb
 );
 
-	reg [7:0] rowData;
-	reg [7:0] romData;
-	reg [2:0] inRow;
+	logic [7:0] rowData;
+	logic [7:0] romData;
+	logic [2:0] inRow;
 	
 	alphaRom rom(
 		.row (inRow),
@@ -19,7 +19,7 @@ module alphaSwitch(
 		.rowData (romData)
 	);
 
-	always @(inData, row, inv) begin
+	always @(inData or row or inv) begin
 		if (row < 3 || row > 9)
 			if (inv)
 				rowData = 8'b11111111;

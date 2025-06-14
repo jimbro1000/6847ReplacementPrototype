@@ -15,6 +15,7 @@ module ProtoVDG(AnG,
                 FSn, 
                 HSn, 
                 OutputFormat, 
+					 RPn,
                 RGB);
 
     input AnG;
@@ -32,6 +33,7 @@ module ProtoVDG(AnG,
    output FSn;
    output HSn;
    output OutputFormat;
+	output RPn;
    output [8:0] RGB;
    
    wire Divider;
@@ -58,6 +60,7 @@ module ProtoVDG(AnG,
    
    assign FSn = FSn_DUMMY;
    assign OutputFormat = OutputFormat_DUMMY;
+	assign RPn = !AnG && (AlphaRow == 4'b0000);
    FormatSelect  FrmtSel (.Clk(Clk), 
 							 .Format(Format), 
 							 .FSn(FSn_DUMMY), 

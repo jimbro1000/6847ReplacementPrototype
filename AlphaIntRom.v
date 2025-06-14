@@ -1,0 +1,546 @@
+`timescale 1ns / 1ps
+//////////////////////////////////////////////////////////////////////////////////
+// Company: 
+// Engineer: 
+// 
+// Create Date:    09:49:48 06/08/2025 
+// Design Name: 
+// Module Name:    AlphaIntRom 
+// Project Name: 
+// Target Devices: 
+// Tool versions: 
+// Description: 
+//
+// Dependencies: 
+//
+// Revision: 
+// Revision 0.01 - File Created
+// Additional Comments: 
+//
+//////////////////////////////////////////////////////////////////////////////////
+module AlphaIntRom(
+    input [5:0] Data,
+    input [3:0] Row,
+    output [7:0] AData
+    );
+
+reg [7:0] alphaData [0:447];
+
+initial begin
+	//@ 0
+	alphaData[000] = 5'b01110;
+	alphaData[001] = 5'b10001;
+	alphaData[002] = 5'b00001;
+	alphaData[003] = 5'b01101;
+	alphaData[004] = 5'b10101;
+	alphaData[005] = 5'b10101;
+	alphaData[006] = 5'b01110;
+	//A 1
+	alphaData[007] = 5'b00100;
+	alphaData[008] = 5'b01010;
+	alphaData[009] = 5'b10001;
+	alphaData[010] = 5'b10001;
+	alphaData[011] = 5'b11111;
+	alphaData[012] = 5'b10001;
+	alphaData[013] = 5'b10001;
+	//B 2
+	alphaData[014] = 5'b11110;
+	alphaData[015] = 5'b01001;
+	alphaData[016] = 5'b01001;
+	alphaData[017] = 5'b01110;
+	alphaData[018] = 5'b01001;
+	alphaData[019] = 5'b01001;
+	alphaData[020] = 5'b11110;
+	//C 3
+	alphaData[021] = 5'b01110;
+	alphaData[022] = 5'b10001;
+	alphaData[023] = 5'b10000;
+	alphaData[024] = 5'b10000;
+	alphaData[025] = 5'b10000;
+	alphaData[026] = 5'b10001;
+	alphaData[027] = 5'b01110;
+	//D 4
+	alphaData[028] = 5'b11110;
+	alphaData[029] = 5'b01001;
+	alphaData[030] = 5'b01001;
+	alphaData[031] = 5'b01001;
+	alphaData[032] = 5'b01001;
+	alphaData[033] = 5'b01001;
+	alphaData[034] = 5'b11110;
+	//E 5
+	alphaData[035] = 5'b11111;
+	alphaData[036] = 5'b10000;
+	alphaData[037] = 5'b10000;
+	alphaData[038] = 5'b11110;
+	alphaData[039] = 5'b10000;
+	alphaData[040] = 5'b10000;
+	alphaData[041] = 5'b11111;
+	//F 6
+	alphaData[042] = 5'b11111;
+	alphaData[043] = 5'b10000;
+	alphaData[044] = 5'b10000;
+	alphaData[045] = 5'b11110;
+	alphaData[046] = 5'b10000;
+	alphaData[047] = 5'b10000;
+	alphaData[048] = 5'b10000;
+	//G 7
+	alphaData[049] = 5'b01111;
+	alphaData[050] = 5'b10000;
+	alphaData[051] = 5'b10000;
+	alphaData[052] = 5'b10011;
+	alphaData[053] = 5'b10001;
+	alphaData[054] = 5'b10001;
+	alphaData[055] = 5'b01110;
+	//H 8
+	alphaData[056] = 5'b10001;
+	alphaData[057] = 5'b10001;
+	alphaData[058] = 5'b10001;
+	alphaData[059] = 5'b11111;
+	alphaData[060] = 5'b10001;
+	alphaData[061] = 5'b10001;
+	alphaData[062] = 5'b10001;
+	//I 9
+	alphaData[063] = 5'b01110;
+	alphaData[064] = 5'b00100;
+	alphaData[065] = 5'b00100;
+	alphaData[066] = 5'b00100;
+	alphaData[067] = 5'b00100;
+	alphaData[068] = 5'b00100;
+	alphaData[069] = 5'b01110;
+	//J 10
+	alphaData[070] = 5'b00001;
+	alphaData[071] = 5'b00001;
+	alphaData[072] = 5'b00001;
+	alphaData[073] = 5'b00001;
+	alphaData[074] = 5'b10001;
+	alphaData[075] = 5'b10001;
+	alphaData[076] = 5'b01110;
+	//K 11
+	alphaData[077] = 5'b10001;
+	alphaData[078] = 5'b10010;
+	alphaData[079] = 5'b10100;
+	alphaData[080] = 5'b11000;
+	alphaData[081] = 5'b10100;
+	alphaData[082] = 5'b10010;
+	alphaData[083] = 5'b10001;
+	//L 12
+	alphaData[084] = 5'b10000;
+	alphaData[085] = 5'b10000;
+	alphaData[086] = 5'b10000;
+	alphaData[087] = 5'b10000;
+	alphaData[088] = 5'b10000;
+	alphaData[089] = 5'b10000;
+	alphaData[090] = 5'b11111;
+	//M 13
+	alphaData[091] = 5'b10001;
+	alphaData[092] = 5'b11011;
+	alphaData[093] = 5'b10101;
+	alphaData[094] = 5'b10101;
+	alphaData[095] = 5'b10001;
+	alphaData[096] = 5'b10001;
+	alphaData[097] = 5'b10001;
+	//N 14
+	alphaData[098] = 5'b10001;
+	alphaData[099] = 5'b11001;
+	alphaData[100] = 5'b10101;
+	alphaData[101] = 5'b10011;
+	alphaData[102] = 5'b10001;
+	alphaData[103] = 5'b10001;
+	alphaData[104] = 5'b10001;
+	//O 15
+	alphaData[105] = 5'b01110;
+	alphaData[106] = 5'b10001;
+	alphaData[107] = 5'b10001;
+	alphaData[108] = 5'b10001;
+	alphaData[109] = 5'b10001;
+	alphaData[110] = 5'b10001;
+	alphaData[111] = 5'b01110;
+	//P 16
+	alphaData[112] = 5'b11110;
+	alphaData[113] = 5'b10001;
+	alphaData[114] = 5'b10001;
+	alphaData[115] = 5'b11110;
+	alphaData[116] = 5'b10000;
+	alphaData[117] = 5'b10000;
+	alphaData[118] = 5'b10000;
+	//Q 17
+	alphaData[119] = 5'b01110;
+	alphaData[120] = 5'b10001;
+	alphaData[121] = 5'b10001;
+	alphaData[122] = 5'b10001;
+	alphaData[123] = 5'b10101;
+	alphaData[124] = 5'b10010;
+	alphaData[125] = 5'b01101;
+	//R 18
+	alphaData[126] = 5'b11110;
+	alphaData[127] = 5'b10001;
+	alphaData[128] = 5'b10001;
+	alphaData[129] = 5'b11110;
+	alphaData[130] = 5'b10100;
+	alphaData[131] = 5'b10010;
+	alphaData[132] = 5'b10001;
+	//S 19
+	alphaData[133] = 5'b01110;
+	alphaData[134] = 5'b10001;
+	alphaData[135] = 5'b01000;
+	alphaData[136] = 5'b00100;
+	alphaData[137] = 5'b00010;
+	alphaData[138] = 5'b10001;
+	alphaData[139] = 5'b01110;
+	//T 20
+	alphaData[140] = 5'b11111;
+	alphaData[141] = 5'b00100;
+	alphaData[142] = 5'b00100;
+	alphaData[143] = 5'b00100;
+	alphaData[144] = 5'b00100;
+	alphaData[145] = 5'b00100;
+	alphaData[146] = 5'b00100;
+	//U 21
+	alphaData[147] = 5'b10001;
+	alphaData[148] = 5'b10001;
+	alphaData[149] = 5'b10001;
+	alphaData[150] = 5'b10001;
+	alphaData[151] = 5'b10001;
+	alphaData[152] = 5'b10001;
+	alphaData[153] = 5'b01110;
+	//V 22
+	alphaData[154] = 5'b10001;
+	alphaData[155] = 5'b10001;
+	alphaData[156] = 5'b10001;
+	alphaData[157] = 5'b01010;
+	alphaData[158] = 5'b01010;
+	alphaData[159] = 5'b00100;
+	alphaData[160] = 5'b00100;
+	//W 23
+	alphaData[161] = 5'b10001;
+	alphaData[162] = 5'b10001;
+	alphaData[163] = 5'b10001;
+	alphaData[164] = 5'b10101;
+	alphaData[165] = 5'b10101;
+	alphaData[166] = 5'b11011;
+	alphaData[167] = 5'b10001;
+	//X 24
+	alphaData[168] = 5'b10001;
+	alphaData[169] = 5'b10001;
+	alphaData[170] = 5'b01010;
+	alphaData[171] = 5'b00100;
+	alphaData[172] = 5'b01010;
+	alphaData[173] = 5'b10001;
+	alphaData[174] = 5'b10001;
+	//Y 25
+	alphaData[175] = 5'b10001;
+	alphaData[176] = 5'b10001;
+	alphaData[177] = 5'b01010;
+	alphaData[178] = 5'b00100;
+	alphaData[179] = 5'b00100;
+	alphaData[180] = 5'b00100;
+	alphaData[181] = 5'b00100;
+	//Z 26
+	alphaData[182] = 5'b11111;
+	alphaData[183] = 5'b00001;
+	alphaData[184] = 5'b00010;
+	alphaData[185] = 5'b00100;
+	alphaData[186] = 5'b01000;
+	alphaData[187] = 5'b10000;
+	alphaData[188] = 5'b11111;
+	//[ 27
+	alphaData[189] = 5'b11100;
+	alphaData[190] = 5'b10000;
+	alphaData[191] = 5'b10000;
+	alphaData[192] = 5'b10000;
+	alphaData[193] = 5'b10000;
+	alphaData[194] = 5'b10000;
+	alphaData[195] = 5'b11100;
+	// \ 28
+	alphaData[196] = 5'b11100;
+	alphaData[197] = 5'b10000;
+	alphaData[198] = 5'b10000;
+	alphaData[199] = 5'b10000;
+	alphaData[200] = 5'b10000;
+	alphaData[201] = 5'b10000;
+	alphaData[202] = 5'b11100;
+	// ] 29
+	alphaData[203] = 5'b11100;
+	alphaData[204] = 5'b10000;
+	alphaData[205] = 5'b10000;
+	alphaData[206] = 5'b10000;
+	alphaData[207] = 5'b10000;
+	alphaData[208] = 5'b10000;
+	alphaData[209] = 5'b11100;
+	// (up) 30
+	alphaData[210] = 5'b00100;
+	alphaData[211] = 5'b01110;
+	alphaData[212] = 5'b10101;
+	alphaData[213] = 5'b00100;
+	alphaData[214] = 5'b00100;
+	alphaData[215] = 5'b00100;
+	alphaData[216] = 5'b00100;
+	// (left) 31
+	alphaData[217] = 5'b00000;
+	alphaData[218] = 5'b00100;
+	alphaData[219] = 5'b01000;
+	alphaData[220] = 5'b11111;
+	alphaData[221] = 5'b01000;
+	alphaData[222] = 5'b00100;
+	alphaData[223] = 5'b00000;
+	// (space) 32
+	alphaData[224] = 5'b00000;
+	alphaData[225] = 5'b00000;
+	alphaData[226] = 5'b00000;
+	alphaData[227] = 5'b00000;
+	alphaData[228] = 5'b00000;
+	alphaData[229] = 5'b00000;
+	alphaData[230] = 5'b00000;
+	// ! 33
+	alphaData[231] = 5'b00100;
+	alphaData[232] = 5'b00100;
+	alphaData[233] = 5'b00100;
+	alphaData[234] = 5'b00100;
+	alphaData[235] = 5'b00100;
+	alphaData[236] = 5'b00000;
+	alphaData[237] = 5'b00100;
+	// " 34
+	alphaData[238] = 5'b01010;
+	alphaData[239] = 5'b01010;
+	alphaData[240] = 5'b00000;
+	alphaData[241] = 5'b00000;
+	alphaData[242] = 5'b00000;
+	alphaData[243] = 5'b00000;
+	alphaData[244] = 5'b00000;
+	// # 35
+	alphaData[245] = 5'b01010;
+	alphaData[246] = 5'b01010;
+	alphaData[247] = 5'b11011;
+	alphaData[248] = 5'b00000;
+	alphaData[249] = 5'b11011;
+	alphaData[250] = 5'b01010;
+	alphaData[251] = 5'b01010;
+	// $ 36
+	alphaData[252] = 5'b00100;
+	alphaData[253] = 5'b01111;
+	alphaData[254] = 5'b10000;
+	alphaData[255] = 5'b01110;
+	alphaData[256] = 5'b00001;
+	alphaData[257] = 5'b11110;
+	alphaData[258] = 5'b00100;
+	// % 37
+	alphaData[259] = 5'b11001;
+	alphaData[260] = 5'b11001;
+	alphaData[261] = 5'b00010;
+	alphaData[262] = 5'b00100;
+	alphaData[263] = 5'b01000;
+	alphaData[264] = 5'b10011;
+	alphaData[265] = 5'b10011;
+	// & 38
+	alphaData[266] = 5'b01000;
+	alphaData[267] = 5'b10100;
+	alphaData[268] = 5'b10100;
+	alphaData[269] = 5'b01000;
+	alphaData[270] = 5'b10101;
+	alphaData[271] = 5'b10010;
+	alphaData[272] = 5'b01101;
+	// ' 39
+	alphaData[273] = 5'b01100;
+	alphaData[274] = 5'b01100;
+	alphaData[275] = 5'b01100;
+	alphaData[276] = 5'b00000;
+	alphaData[277] = 5'b00000;
+	alphaData[278] = 5'b00000;
+	alphaData[279] = 5'b00000;
+	// ( 40
+	alphaData[280] = 5'b00100;
+	alphaData[281] = 5'b01000;
+	alphaData[282] = 5'b10000;
+	alphaData[283] = 5'b10000;
+	alphaData[284] = 5'b10000;
+	alphaData[285] = 5'b01000;
+	alphaData[286] = 5'b00100;
+	// ) 41
+	alphaData[287] = 5'b00100;
+	alphaData[288] = 5'b00010;
+	alphaData[289] = 5'b00001;
+	alphaData[290] = 5'b00001;
+	alphaData[291] = 5'b00001;
+	alphaData[292] = 5'b00010;
+	alphaData[293] = 5'b00100;
+	// * 42
+	alphaData[294] = 5'b00000;
+	alphaData[295] = 5'b00100;
+	alphaData[296] = 5'b01110;
+	alphaData[297] = 5'b11111;
+	alphaData[298] = 5'b01110;
+	alphaData[299] = 5'b00100;
+	alphaData[300] = 5'b00000;
+	// + 43
+	alphaData[301] = 5'b00000;
+	alphaData[302] = 5'b00100;
+	alphaData[303] = 5'b00100;
+	alphaData[304] = 5'b11111;
+	alphaData[305] = 5'b00100;
+	alphaData[306] = 5'b00100;
+	alphaData[307] = 5'b00000;
+	// , 44
+	alphaData[308] = 5'b00000;
+	alphaData[309] = 5'b00000;
+	alphaData[310] = 5'b00000;
+	alphaData[311] = 5'b11000;
+	alphaData[312] = 5'b11000;
+	alphaData[313] = 5'b01000;
+	alphaData[314] = 5'b10000;
+	// - 45
+	alphaData[315] = 5'b00000;
+	alphaData[316] = 5'b00000;
+	alphaData[317] = 5'b00000;
+	alphaData[318] = 5'b11111;
+	alphaData[319] = 5'b00000;
+	alphaData[320] = 5'b00000;
+	alphaData[321] = 5'b00000;
+	// . 46
+	alphaData[322] = 5'b00000;
+	alphaData[323] = 5'b00000;
+	alphaData[324] = 5'b00000;
+	alphaData[325] = 5'b00000;
+	alphaData[326] = 5'b00000;
+	alphaData[327] = 5'b11000;
+	alphaData[328] = 5'b11000;
+	// / 47
+	alphaData[329] = 5'b00001;
+	alphaData[330] = 5'b00001;
+	alphaData[331] = 5'b00010;
+	alphaData[332] = 5'b00100;
+	alphaData[333] = 5'b01000;
+	alphaData[334] = 5'b10000;
+	alphaData[335] = 5'b10000;
+	// 0 48
+	alphaData[336] = 5'b01100;
+	alphaData[337] = 5'b10010;
+	alphaData[338] = 5'b10010;
+	alphaData[339] = 5'b10010;
+	alphaData[340] = 5'b10010;
+	alphaData[341] = 5'b10010;
+	alphaData[342] = 5'b01100;
+	// 1 49
+	alphaData[343] = 5'b00100;
+	alphaData[344] = 5'b01100;
+	alphaData[345] = 5'b00100;
+	alphaData[346] = 5'b00100;
+	alphaData[347] = 5'b00100;
+	alphaData[348] = 5'b00100;
+	alphaData[349] = 5'b01110;
+	// 2 50
+	alphaData[350] = 5'b01110;
+	alphaData[351] = 5'b10001;
+	alphaData[352] = 5'b00001;
+	alphaData[353] = 5'b01110;
+	alphaData[354] = 5'b10000;
+	alphaData[355] = 5'b10000;
+	alphaData[356] = 5'b11111;
+	// 3 51
+	alphaData[357] = 5'b01110;
+	alphaData[358] = 5'b10001;
+	alphaData[359] = 5'b00001;
+	alphaData[360] = 5'b00110;
+	alphaData[361] = 5'b00001;
+	alphaData[362] = 5'b10001;
+	alphaData[363] = 5'b01110;
+	// 4 52
+	alphaData[364] = 5'b00010;
+	alphaData[365] = 5'b00110;
+	alphaData[366] = 5'b01010;
+	alphaData[367] = 5'b11110;
+	alphaData[368] = 5'b00010;
+	alphaData[369] = 5'b00010;
+	alphaData[370] = 5'b00010;
+	// 5 53
+	alphaData[371] = 5'b11111;
+	alphaData[372] = 5'b10000;
+	alphaData[373] = 5'b10000;
+	alphaData[374] = 5'b11110;
+	alphaData[375] = 5'b00001;
+	alphaData[376] = 5'b10001;
+	alphaData[377] = 5'b01110;
+	// 6 54
+	alphaData[378] = 5'b01110;
+	alphaData[379] = 5'b10000;
+	alphaData[380] = 5'b10000;
+	alphaData[381] = 5'b11110;
+	alphaData[382] = 5'b10001;
+	alphaData[383] = 5'b10001;
+	alphaData[384] = 5'b01110;
+	// 7 55
+	alphaData[385] = 5'b11111;
+	alphaData[386] = 5'b00001;
+	alphaData[387] = 5'b00010;
+	alphaData[388] = 5'b00100;
+	alphaData[389] = 5'b01000;
+	alphaData[390] = 5'b10000;
+	alphaData[391] = 5'b10000;
+	// 8 56
+	alphaData[392] = 5'b01110;
+	alphaData[393] = 5'b10001;
+	alphaData[394] = 5'b10001;
+	alphaData[395] = 5'b01110;
+	alphaData[396] = 5'b10001;
+	alphaData[397] = 5'b10001;
+	alphaData[398] = 5'b01110;
+	// 9 57
+	alphaData[399] = 5'b01110;
+	alphaData[400] = 5'b10001;
+	alphaData[401] = 5'b10001;
+	alphaData[402] = 5'b01111;
+	alphaData[403] = 5'b00001;
+	alphaData[404] = 5'b00001;
+	alphaData[405] = 5'b01110;
+	// : 58
+	alphaData[406] = 5'b00000;
+	alphaData[407] = 5'b01100;
+	alphaData[408] = 5'b01100;
+	alphaData[409] = 5'b00000;
+	alphaData[410] = 5'b01100;
+	alphaData[411] = 5'b01100;
+	alphaData[412] = 5'b00000;
+	// ; 59
+	alphaData[413] = 5'b01100;
+	alphaData[414] = 5'b01100;
+	alphaData[415] = 5'b00000;
+	alphaData[416] = 5'b01100;
+	alphaData[417] = 5'b01100;
+	alphaData[418] = 5'b00100;
+	alphaData[419] = 5'b01000;
+	// < 60
+	alphaData[420] = 5'b00010;
+	alphaData[421] = 5'b00100;
+	alphaData[422] = 5'b01000;
+	alphaData[423] = 5'b10000;
+	alphaData[424] = 5'b01000;
+	alphaData[425] = 5'b00100;
+	alphaData[426] = 5'b00010;
+	// = 61
+	alphaData[427] = 5'b00000;
+	alphaData[428] = 5'b00000;
+	alphaData[429] = 5'b11111;
+	alphaData[430] = 5'b10000;
+	alphaData[431] = 5'b11111;
+	alphaData[432] = 5'b00000;
+	alphaData[433] = 5'b00010;
+	// > 62
+	alphaData[434] = 5'b01000;
+	alphaData[435] = 5'b00100;
+	alphaData[436] = 5'b00010;
+	alphaData[437] = 5'b00001;
+	alphaData[438] = 5'b00010;
+	alphaData[439] = 5'b00100;
+	alphaData[440] = 5'b01000;
+	// ? 63
+	alphaData[441] = 5'b01100;
+	alphaData[442] = 5'b10010;
+	alphaData[443] = 5'b00010;
+	alphaData[444] = 5'b00100;
+	alphaData[445] = 5'b00100;
+	alphaData[446] = 5'b00000;
+	alphaData[447] = 5'b00100;
+end
+
+assign AData = {2'b00,alphaData[(Data * 7) + Row],1'b0};
+
+endmodule
