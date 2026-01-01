@@ -1,6 +1,7 @@
 `timescale 1ns / 1ps
 
-module ProtoVDG(GClk,
+module ProtoVDG(
+					 GClk,
 					 AnG, 
                 AnS, 
                 Clk, 
@@ -17,8 +18,9 @@ module ProtoVDG(GClk,
                 HSn, 
                 OutputFormat, 
 					 RPn,
-                RGB,
-					 tclk);
+                RGB
+//					 ,tclk
+					);
 
     input GClk;
 	 input AnG;
@@ -38,7 +40,7 @@ module ProtoVDG(GClk,
    output OutputFormat;
 	output RPn;
    output [8:0] RGB;
-	output tclk;
+//	output tclk;
    
    wire Divider;
    wire Load;
@@ -68,16 +70,16 @@ module ProtoVDG(GClk,
    assign OutputFormat = OutputFormat_DUMMY;
 	assign RPn = !AnG && (AlphaRow == 4'b0000);
 	
-	reg[2:0] frameClockDivider = 3'b000;
-	reg frameClk = 1'b0;
-	always @(posedge GClk) begin
-		frameClockDivider <= frameClockDivider + 3'd1;
-	end
-	always @(posedge GClk) begin
-		if (frameClockDivider == 3'd0)
-			frameClk <= ~frameClk;
-	end
-	assign tclk = frameClk;
+//	reg[2:0] frameClockDivider = 3'b000;
+//	reg frameClk = 1'b0;
+//	always @(posedge GClk) begin
+//		frameClockDivider <= frameClockDivider + 3'd1;
+//	end
+//	always @(posedge GClk) begin
+//		if (frameClockDivider == 3'd0)
+//			frameClk <= ~frameClk;
+//	end
+//	assign tclk = frameClk;
 	// Multiplexer - pick colour clock timing based on Format signal
    FormatSelect  	FrmtSel (
 							.Clk(Clk), 

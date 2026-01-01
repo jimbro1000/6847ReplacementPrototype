@@ -116,7 +116,7 @@ set_global_assignment -name MAX7000_DEVICE_IO_STANDARD TTL
 
 # EDA Netlist Writer Assignments
 # ==============================
-set_global_assignment -name EDA_SIMULATION_TOOL "ModelSim-Altera (Verilog)"
+set_global_assignment -name EDA_SIMULATION_TOOL "ModelSim-Altera (SystemVerilog)"
 
 # start EDA_TOOL_SETTINGS(eda_design_synthesis)
 # ---------------------------------------------
@@ -136,7 +136,7 @@ set_global_assignment -name EDA_SIMULATION_TOOL "ModelSim-Altera (Verilog)"
 	# EDA Netlist Writer Assignments
 	# ==============================
 	set_global_assignment -name EDA_TIME_SCALE "1 ps" -section_id eda_simulation
-	set_global_assignment -name EDA_OUTPUT_DATA_FORMAT "VERILOG HDL" -section_id eda_simulation
+set_global_assignment -name EDA_OUTPUT_DATA_FORMAT "SYSTEMVERILOG HDL" -section_id eda_simulation
 
 # end EDA_TOOL_SETTINGS(eda_simulation)
 # -------------------------------------
@@ -196,3 +196,5 @@ set_global_assignment -name EDA_SIMULATION_TOOL "ModelSim-Altera (Verilog)"
 
 # end ENTITY(ProtoVDG)
 # --------------------
+set_global_assignment -name SYSTEMVERILOG_FILE ProtoVDGTB.sv
+set_global_assignment -name DEVICE_FILTER_PACKAGE PLCC
