@@ -24,39 +24,51 @@ module ColourMux(
     input [3:0] Colour2,
     input Sel2,
     input [3:0] Colour3,
+	 input backporch,
+	 input viewportActive,
     output reg [8:0] RGB
     );
 
 	wire [3:0] Colour;
 	
-	assign Colour = Sel1 ? Colour1 : Sel2 ? Colour2 : Colour3;
+	// backporch must return full black (default case)
+	// viewport active multiplexes graphic input (alpha, semi, graphic)
+	// sel1 = colour1
+	// sel2 = colour2
+	// !sel1 & !sel2 = colour3
+	// anything else must be a border
+	assign Colour = backporch ? 4'b1111 : viewportActive ? Sel1 ? Colour1 : Sel2 ? Colour2 : Colour3 : 4'b1110;
 	
 	always @(Colour) begin
 		case (Colour)
+			4'b0000:
+				RGB = 9'b001001001; // almost black
 			4'b0001:
-				RGB = 9'b001111000;
+				RGB = 9'b001111000; // green
 			4'b0010:
-				RGB = 9'b111111000;
+				RGB = 9'b111111000; // yellow
 			4'b0011:
-				RGB = 9'b010001111;
+				RGB = 9'b010001111; // blue
 			4'b0100:
-				RGB = 9'b110000010;
+				RGB = 9'b110000010; // red
 			4'b0101: 
-				RGB = 9'b111111111;
+				RGB = 9'b111111111; // white (buff)
 			4'b0110:
-				RGB = 9'b001111100;
+				RGB = 9'b001111100; // cyan
 			4'b0111:
-				RGB = 9'b111001111;
+				RGB = 9'b111001111; // magenta
 			4'b1000:
-				RGB = 9'b111100000;
+				RGB = 9'b111100000; // orange
 			4'b1001:
-				RGB = 9'b111110010;
+				RGB = 9'b111110010; // bright orange
 			4'b1010:
-				RGB = 9'b000010000;
+				RGB = 9'b000010000; // dark green
 			4'b1011:
-				RGB = 9'b010000000;
+				RGB = 9'b010001001; // dark red
+			4'b1110:
+				RGB = 9'b000010000; // dark green border
 			default:
-				RGB = 9'b000000000;
+				RGB = 9'b000000000; // backporch black
 		endcase
 	end
 endmodule

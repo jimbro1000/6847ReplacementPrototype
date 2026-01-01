@@ -24,7 +24,7 @@ module AlphaIntRom(
     output [7:0] AData
     );
 
-reg [7:0] alphaData [0:447];
+reg [4:0] alphaData [0:447];
 
 initial begin
 	//@ 0
@@ -541,6 +541,8 @@ initial begin
 	alphaData[447] = 5'b00100;
 end
 
+// probably need to change to (Data * 8) and use a sparse array for the character data
+// the assigned memory block is already 512 deep so this would make no difference to budget
 assign AData = {2'b00,alphaData[(Data * 7) + Row],1'b0};
 
 endmodule

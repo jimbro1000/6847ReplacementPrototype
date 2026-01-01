@@ -37,16 +37,14 @@ module counterDbl
 	assign count = pCount + nCount;
 
 	always @(posedge clk, posedge reset) begin
-		if (reset)
-			pCount <= 0;
-		else if (enable)
-			pCount <= pCount + 1;
+		pCount <= reset ? 0 : enable ? pCount + 1 : pCount;
 	end
 
 	always @(negedge clk, posedge reset) begin
-		if (reset)
-			nCount <= 0;
-		else if (enable)
-			nCount <= nCount + 1;
+		nCount <= reset ? 0 : enable ? nCount + 1 : nCount;
+//		if (reset)
+//			nCount <= 0;
+//		else if (enable)
+//			nCount <= nCount + 1;
 	end
 endmodule

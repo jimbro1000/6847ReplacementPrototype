@@ -19,23 +19,23 @@
 //
 //////////////////////////////////////////////////////////////////////////////////
 module SemiSwitch(
-    input InE,
+//    input InE,
     input [7:0] S4Data,
     input [3:0] S4Colour,
-    input [7:0] S6Data,
-    input [3:0] S6Colour,
+//    input [7:0] S6Data,
+//    input [3:0] S6Colour,
     output reg [7:0] SData,
     output reg [3:0] SColour
     );
 
 	always @(*) begin
-		if (InE) begin
-			SData <= S6Data;
-			SColour <= S6Colour;
-		end else begin
+//		if (InE) begin
+//			SData <= S6Data;
+//			SColour <= S6Colour;
+//		end else begin
 			SData <= S4Data;
 			SColour <= S4Colour;
-		end
+//		end
 	end
 
 endmodule
