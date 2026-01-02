@@ -93,10 +93,8 @@ set_location_assignment PIN_75 -to FSn
 set_location_assignment PIN_76 -to HSn
 set_location_assignment PIN_20 -to Css
 set_location_assignment PIN_21 -to DA0
-set_location_assignment PIN_37 -to InE
 set_location_assignment PIN_52 -to RGB[3]
 set_location_assignment PIN_83 -to GClk
-set_location_assignment PIN_81 -to tclk
 
 # Analysis & Synthesis Assignments
 # ================================

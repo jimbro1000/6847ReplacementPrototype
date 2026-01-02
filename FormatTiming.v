@@ -23,10 +23,9 @@ module FormatTiming(
 	input FrameFormat,
 	input AnG,
 	input Clk,
-	input FClk,
 	output PixelClk,
-	output HSn,
-	output FSn,
+	output reg HSn,
+	output reg FSn,
 	output BackPorch,
 	output active,
 	output Load,
@@ -39,8 +38,9 @@ module FormatTiming(
 	wire [9:0] frameBottomRow;
 	wire [9:0] frameAllRows;
 	wire slowMode;
-//	wire pixcolReset;
 	reg u_da0;
+	reg hBlank;
+	reg vBlank;
 
 // horizontal beam counter using gclk for frame timing accuracy
 	wire colReset;
@@ -53,14 +53,29 @@ module FormatTiming(
 	wire daCountEnable;
 
 	always @(negedge Clk) begin
-		if (colReset) begin
-			colCounter <= 9'd0;
-			if (lineReset)
-				lineCounter <= 9'd0;
-			else
+		if (colCounter == allcols) begin
+			colCounter <= 9'd0; // reset columns
+			HSn <= 1'b0; // start sync
+			hBlank <= 1'b1; // start blank if not already running
+			if (lineCounter == frameAllRows) begin
+				lineCounter <= 9'd0; // reset rows
+				FSn <= 1'b0; // start sync
+				vBlank <= 1'b1; // start blank
+			end else begin
 				lineCounter <= lineCounter + 9'd1;
+				if (lineCounter == 4)
+					FSn <= 1'b1; // end sync
+				if (lineCounter == 8)
+					vBlank <= 1'b0; // end blank
+			end
 		end else begin
 			colCounter <= colCounter + 9'd1;
+			if (colCounter == leftSync)
+				HSn <= 1'b1; // end sync
+			if (colCounter == leftmargin)
+				hBlank <= 1'b0; // end blank
+			if (colCounter == rightmargin)
+				hBlank <= 1'b1; // start blank
 		end
 		if (daCountEnable) begin
 			daCount <= daCount + 2'd1;
@@ -88,10 +103,10 @@ module FormatTiming(
 	assign alphaRow = alphaRowCounter;
 		
 	// horizontal
-	parameter leftSync = 13; //24; // now using gclk instead of pclk - 4us duration , 25 glck/16
-	parameter allcols = 227; //399; // now using gclk instead of pclk - 64us duration, 400 gclk/16
-	parameter leftmargin = 42; //74; // back porch, now using gclk instead of pclk - 12us duration, 75 gclk/16
-	parameter rightmargin = 227; //400; // suggested 8 cycles of front porch
+	parameter leftSync = 14; // 4us duration
+	parameter allcols = 227; // 64us duration (63.55)
+	parameter leftmargin = 34; // 12us duration //42
+	parameter rightmargin = 225; // suggested 8 cycles of front porch //225
 	// vertical
 	parameter activerows = 192;
 	// pal
@@ -100,13 +115,13 @@ module FormatTiming(
 	parameter toprow = 64;
 	parameter bottomrow = 256; //pal
 	// ntsc
-	parameter allrows2 = 261;// ntsc
+	parameter allrows2 = 258;// ntsc
 	parameter topmargin2 = 39; //ntsc
 	parameter toprow2 = 48;
 	parameter bottomrow2 = 240; //ntsc
 
 	//parameter activecols = 128;// * 2 = 256
-	parameter leftcols = 64; //71;// 71.5 * 2 = 143
+	parameter leftcols = 64; //
 	parameter rightcols = 192; //leftcols + activecols + 1;
 	parameter leftpreload = 62; //leftcols - 4;
 	parameter rightpreload = 190; //rightcols - 4;
@@ -121,18 +136,22 @@ module FormatTiming(
 
 	
 	// vertical sync active low
-	assign FSn = ~(lineCounter[8:2] == 0); // 8 lines of vsync according to spec - 6847 produces nearer 40 lines...use 32 need to fix this for NTSC if I start at 16 instead of 0
+	//assign FSn = ~(lineCounter[8:2] == 6'd0); 
+	// 8 lines of vsync according to spec - 6847 produces nearer 40 lines...use 32 need to fix this for NTSC if I start at 16 instead of 0
+	// Spectrum ULA generates just 4 lines of vsync and 8 lines of blank
+	
 	// horizontal sync active low
-	assign HSn = (colCounter > leftSync);
+	//assign HSn = (colCounter > leftSync);
+
 	// frame rows counter reset active high
-	assign lineReset = lineCounter == frameAllRows;
+//	assign lineReset = lineCounter == frameAllRows;
 	// column counter reset active high
-	assign colReset = colCounter == allcols;
+//	assign colReset = colCounter == allcols;
 	// PAL:
 	// NTSC: start lineCounter at 16?
 	assign activeRow = (lineCounter > frameTopRow) && (lineCounter < frameBottomRow);
 	// backporch active high
-	assign BackPorch = (colCounter < leftmargin) || (colCounter > rightmargin) || ~FSn;
+	assign BackPorch = hBlank || vBlank;
 	
 	assign Load = colCounter[1:0] == 0;
 	assign active = activeRow && (colCounter > leftcols) && (colCounter < rightcols);

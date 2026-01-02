@@ -9,7 +9,6 @@ module ProtoVDG(
                 Data, 
                 Format, 
                 GM, 
-                InE, 
                 Inv, 
                 PALClk, 
                 ColourClock, 
@@ -19,7 +18,6 @@ module ProtoVDG(
                 OutputFormat, 
 					 RPn,
                 RGB
-//					 ,tclk
 					);
 
     input GClk;
@@ -30,7 +28,6 @@ module ProtoVDG(
     input [7:0] Data;
     input Format;
     input [2:0] GM;
-    input InE;
     input Inv;
     input PALClk;
    output ColourClock;
@@ -70,16 +67,6 @@ module ProtoVDG(
    assign OutputFormat = OutputFormat_DUMMY;
 	assign RPn = !AnG && (AlphaRow == 4'b0000);
 	
-//	reg[2:0] frameClockDivider = 3'b000;
-//	reg frameClk = 1'b0;
-//	always @(posedge GClk) begin
-//		frameClockDivider <= frameClockDivider + 3'd1;
-//	end
-//	always @(posedge GClk) begin
-//		if (frameClockDivider == 3'd0)
-//			frameClk <= ~frameClk;
-//	end
-//	assign tclk = frameClk;
 	// Multiplexer - pick colour clock timing based on Format signal
    FormatSelect  	FrmtSel (
 							.Clk(Clk), 
@@ -90,7 +77,6 @@ module ProtoVDG(
 							.FrameFormat(OutputFormat_DUMMY));
 	// Frame timing generator - orchestrate sync, data pre-load
    FormatTiming  	FmtTiming (
-							.FClk(frameClk),
 							.AnG(AnG), 
 							.Clk(Clk), 
 							.FrameFormat(OutputFormat_DUMMY), 
