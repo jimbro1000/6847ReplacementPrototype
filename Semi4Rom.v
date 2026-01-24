@@ -19,11 +19,12 @@
 //
 //////////////////////////////////////////////////////////////////////////////////
 module Semi4Rom(
-    input [7:0] Data,
-    input [3:0] Row,
-    output [7:0] SData,
-    output [3:0] SColour
-    );
+	input Clk,
+   input [7:0] Data,
+   input [3:0] Row,
+   output reg [7:0] SData,
+   output reg [3:0] SColour
+);
 
 	reg [7:0] semiData[0:3];
 	
@@ -34,6 +35,11 @@ module Semi4Rom(
 		semiData[3] = 8'b00000000;
 	end
 	
-	assign SColour = ({1'b0,Data[6:4]}) + 4'b0001;
-	assign SData = (Row < 4'b0110) ? semiData[Data[3:2]] : semiData[Data[1:0]];
+	always @(negedge Clk) begin
+		if (Row == 4'd0)
+			SData <= semiData[Data[3:2]];
+		if (Row == 4'd6)
+			SData <= semiData[Data[1:0]];
+		SColour <= ({1'b0,Data[6:4]}) + 4'd1;
+	end
 endmodule

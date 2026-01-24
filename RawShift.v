@@ -23,20 +23,39 @@ module RawShift(
     input Clk,
     input Divider,
     input Load,
-    output [1:0] Pixel
+    output reg [1:0] Pixel
     );
 
 	reg [7:0] pixelData;
+	reg [1:0] offset;
 	
-	assign Pixel = Divider ? pixelData[7:6] : {1'b0,pixelData[7]};
+	assign bitOffset = {offset, Clk};
 	
-	always @(Clk or Load or Divider or Data or pixelData) begin
+	always @(negedge Clk) begin
 		if (Load)
-			pixelData <= Data;
-		else if (Divider == 0)
-			pixelData <= pixelData << 1;
+			offset <= 2'b11;
 		else
-			pixelData <= pixelData << 2;
+			offset <= offset - 2'd1;
+	end
+	
+	always @(posedge Load) begin
+		pixelData <= Data;
+	end
+	
+	always @(Clk) begin
+		if (Divider == 0)
+			Pixel <= {1'b0,pixelData[bitOffset]};
+		else
+			case (offset)
+				2'b11:
+					Pixel <= pixelData[7:6];
+				2'b10:
+					Pixel <= pixelData[5:4];
+				2'b01:
+					Pixel <= pixelData[3:2];
+				default:
+					Pixel <= pixelData[1:0];
+			endcase
 	end
 	
 endmodule

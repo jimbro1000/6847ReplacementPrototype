@@ -27,7 +27,7 @@ module FormatSelect(
 	 output ColourClock
     );
 
-	assign ColourClock = FrameFormat ? PALClk : Clk;
+	assign ColourClock = FrameFormat ? Clk : PALClk;
 
 	always @(posedge FSn) begin
 		FrameFormat = Format;

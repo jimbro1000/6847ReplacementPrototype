@@ -19,10 +19,11 @@
 //
 //////////////////////////////////////////////////////////////////////////////////
 module AlphaIntRom(
-    input [5:0] Data,
-    input [3:0] Row,
-    output [7:0] AData
-    );
+	input Clk,
+   input [5:0] Data,
+   input [3:0] Row,
+   output reg [7:0] AData
+);
 
 reg [4:0] alphaData [0:447];
 
@@ -543,6 +544,21 @@ end
 
 // probably need to change to (Data * 8) and use a sparse array for the character data
 // the assigned memory block is already 512 deep so this would make no difference to budget
-assign AData = {2'b00,alphaData[(Data * 7) + Row],1'b0};
+//assign AData = {2'b00,alphaData[(Data * 7) + Row],1'b0};
+
+wire [8:0] offset;
+wire [2:0] dataRow;
+assign dataRow = Row - 3;
+assign offset = (Data * 7) + dataRow;
+
+
+always @(Clk) begin
+	case(Row)
+		3'd3,3'd4,3'd5,3'd6,3'd7,3'd8,3'd9:
+			AData <= {2'b00,alphaData[offset],1'b0};
+		default:
+			AData <= 8'd0;
+	endcase
+end
 
 endmodule

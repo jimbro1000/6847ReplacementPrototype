@@ -19,22 +19,37 @@
 //
 //////////////////////////////////////////////////////////////////////////////////
 module SemiShift(
-    input [7:0] Data,
-    input Clk,
-    input Load,
-    input [3:0] SColour,
-    output [3:0] Colour
-    );
+   input [7:0] Data,
+   input Clk,
+   input Load,
+   input [3:0] SColour,
+   output reg [3:0] Colour
+);
 	 
-	 reg [7:0] pixelData;
-	 
-	 assign Colour = pixelData[7] ? SColour : 4'b0000;
-
-	always @(Clk or Load or Data or pixelData) begin
+	reg [7:0] pixelData;
+	reg [1:0] offset;
+	
+	assign bitOffset = {offset, Clk};
+	
+	always @(negedge Clk) begin
 		if (Load)
-			pixelData <= Data;
-		else begin
-			pixelData <= pixelData << 1;
-		end
+			offset <= 2'b11;
+		else
+			offset <= offset - 2'd1;
+	end
+	
+//	assign Colour = pixelData[7] ? SColour : 4'b0000;
+	
+	always @(posedge Load) begin
+		pixelData <= Data;
+	end
+
+	always @(Clk) begin
+		case (offset)
+			2'b11, 2'b10:
+				Colour <= pixelData[7] ? 4'b0000 : SColour;
+			default:
+				Colour <= pixelData[3] ? 4'b0000 : SColour;
+		endcase
 	end
 endmodule
