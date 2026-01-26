@@ -32,14 +32,11 @@
 
 set_time_format -unit ns -decimal_places 3
 
-
-
 #**************************************************************
 # Create Clock
 #**************************************************************
 
 create_clock -name {pixel_clock} -period 279.365 -waveform { 0.000 139.682 } [get_ports {Clk}]
-
 
 #**************************************************************
 # Create Generated Clock
@@ -57,7 +54,7 @@ create_clock -name {pixel_clock} -period 279.365 -waveform { 0.000 139.682 } [ge
 # Set Clock Uncertainty
 #**************************************************************
 
-
+set_clock_uncertainty 0.5 -setup -from [get_clocks {pixel_clock}]
 
 #**************************************************************
 # Set Input Delay

@@ -29,16 +29,12 @@ module SemiShift(
 	reg [7:0] pixelData;
 	reg [1:0] offset;
 	
-	assign bitOffset = {offset, Clk};
-	
 	always @(negedge Clk) begin
 		if (Load)
 			offset <= 2'b11;
 		else
 			offset <= offset - 2'd1;
 	end
-	
-//	assign Colour = pixelData[7] ? SColour : 4'b0000;
 	
 	always @(posedge Load) begin
 		pixelData <= Data;

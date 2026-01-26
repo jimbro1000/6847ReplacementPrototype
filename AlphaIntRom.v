@@ -547,14 +547,13 @@ end
 //assign AData = {2'b00,alphaData[(Data * 7) + Row],1'b0};
 
 wire [8:0] offset;
-wire [2:0] dataRow;
+wire [3:0] dataRow;
 assign dataRow = Row - 3;
 assign offset = (Data * 7) + dataRow;
 
-
 always @(Clk) begin
 	case(Row)
-		3'd3,3'd4,3'd5,3'd6,3'd7,3'd8,3'd9:
+		4'd3,4'd4,4'd5,4'd6,4'd7,4'd8,4'd9:
 			AData <= {2'b00,alphaData[offset],1'b0};
 		default:
 			AData <= 8'd0;

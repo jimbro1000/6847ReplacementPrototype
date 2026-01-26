@@ -27,6 +27,7 @@ module Semi4Rom(
 );
 
 	reg [7:0] semiData[0:3];
+	reg [1:0] index;
 	
 	initial begin
 		semiData[0] = 8'b11111111;

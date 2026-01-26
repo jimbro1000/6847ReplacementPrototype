@@ -148,14 +148,14 @@ module ProtoVDG(
 //                     .SColour(S6Colour[3:0]), 
 //                     .SData(S6Data));
 	// Lookup character rom data
-//   AlphaIntRom  	AIRom (
-//							.Data(useData[5:0]), 
-//							.Row(AlphaRow), 
-//							.AData(AlphaRowData));
+   AlphaIntRom  	AIRom (
+							.Data(useData[5:0]), 
+							.Row(AlphaRow), 
+							.AData(AlphaRowData));
 	// Multiplexer - select alpha pixel data or graphic pixel data
    AlphaSwitch  	AlphaSw (
-//							.Data(AlphaRowData), 
-							.Data(useData), 
+							.Data(AlphaRowData), 
+//							.Data(useData), 
 							.Inv(useInv), 
 							.AData(AlphaData));
 	// alpha data shift register

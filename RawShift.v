@@ -29,8 +29,6 @@ module RawShift(
 	reg [7:0] pixelData;
 	reg [1:0] offset;
 	
-	assign bitOffset = {offset, Clk};
-	
 	always @(negedge Clk) begin
 		if (Load)
 			offset <= 2'b11;
@@ -44,7 +42,7 @@ module RawShift(
 	
 	always @(Clk) begin
 		if (Divider == 0)
-			Pixel <= {1'b0,pixelData[bitOffset]};
+			Pixel <= {1'b0,pixelData[{offset, Clk}]};
 		else
 			case (offset)
 				2'b11:
