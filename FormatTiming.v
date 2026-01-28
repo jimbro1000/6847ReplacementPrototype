@@ -50,10 +50,9 @@ module FormatTiming(
 	reg [8:0] lineCounter;
 	// preload data pixel counter
 	reg [1:0] daCount;
-	// loadCounter
-//	reg [2:0] loadCount;
 	// enable data address count - stops at end of line, starts 2 clocks before first display byte on each line
 	reg daCountEnable;
+	reg [3:0] alphaRowCounter;
 	
 	always @(negedge Clk) begin
 		if (colCounter == allcols) begin
@@ -75,7 +74,12 @@ module FormatTiming(
 					activeRow <= 1'b1;
 				if (lineCounter == frameBottomRow)
 					activeRow <= 1'b0;
+				if ((alphaRowCounter == 4'b1011) || (lineCounter == frameTopRow))
+					alphaRowCounter <= 4'd0;
+				else
+					alphaRowCounter <= alphaRowCounter + 4'd1;
 			end
+			
 		end else begin
 			colCounter <= colCounter + 9'd1;
 			if (colCounter == leftSync)
@@ -93,14 +97,14 @@ module FormatTiming(
 			if (activeRow && colCounter == rightcols)
 				active <= 1'b0;
 		end
-	
+
 		daCount <= daCount + 2'd1;
 		if (daCount == 2'd0)
 			if (daCountEnable)
 				u_da0 <= ~u_da0;
 			else if (HSn)
 				u_da0 <= 1'b0;
-		Load = slowMode ? colCounter[2:0] == 3'd0 : colCounter[1:0] == 2'd0;
+		Load = slowMode ? colCounter[2:0] == 3'd1 : colCounter[1:0] == 2'd1;
 	end
 	
 	reg Clk3;
@@ -108,16 +112,6 @@ module FormatTiming(
 		Clk3 = ~Clk3;
 	end
 
-	reg [3:0] alphaRowCounter;
-	always @(negedge HSn) begin
-		if (activeRow)
-			if (alphaRowCounter == 4'b1011)
-				alphaRowCounter <= 4'd0;
-			else
-				alphaRowCounter <= alphaRowCounter + 4'd1;
-		else
-			alphaRowCounter <= 4'd0;
-	end
 	assign alphaRow = alphaRowCounter;
 		
 	// horizontal
@@ -133,11 +127,6 @@ module FormatTiming(
 	parameter toprow = 9'd84;
 	parameter bottomrow = 9'd276; //pal
 	parameter allrows = 9'd311;// pal
-//	parameter vsync = 9'd32;
-//	parameter topBlank = 9'd45; //pal
-//	parameter toprow = 9'd95;
-//	parameter bottomrow = 9'd287; //pal
-//	parameter allrows = 9'd311;// pal
 	// best = 7, 20, 95, 287, 311
 	// target = 32, 45, 95, 287, 311 
 	
@@ -150,10 +139,9 @@ module FormatTiming(
 
 	//parameter activecols = 128;// * 2 = 256
 	//to achieve 40 data access cycles per line the preload must start at 66-69 clock cycles
-//	parameter leftLoadEnable = 9'd64; // reset loadcount
-	parameter leftcols = 9'd61; //
-	parameter rightcols = 9'd189; //leftcols + activecols + 1;
-	parameter leftpreload = 9'd58; //leftcols - 4;
+	parameter leftcols = 9'd64; //
+	parameter rightcols = 9'd192; //leftcols + activecols + 1;
+	parameter leftpreload = 9'd63; //leftcols - 4;
 	parameter rightpreload = 9'd217; //rightcols - 4;
 
 	initial begin
@@ -163,7 +151,6 @@ module FormatTiming(
 		Clk3 = 0;
 		alphaRowCounter = 0;
 		daCount = 2'd0;
-//		loadCount = 3'd0;
 	end
 
 	// vertical sync active low
@@ -171,14 +158,6 @@ module FormatTiming(
 	// 8 lines of vsync according to spec - 6847 produces nearer 40 lines...use 32 need to fix this for NTSC if I start at 16 instead of 0
 	// Spectrum ULA generates just 4 lines of vsync and 8 lines of blank
 	
-	// horizontal sync active low
-	//assign HSn = (colCounter > leftSync);
-
-	// frame rows counter reset active high
-	//	assign lineReset = lineCounter == frameAllRows;
-	// column counter reset active high
-	//	assign colReset = colCounter == allcols;
-
 	// backporch active high
 	assign BackPorch = hBlank || vBlank;
 	
