@@ -19,12 +19,12 @@
 //
 //////////////////////////////////////////////////////////////////////////////////
 module RawShift(
-    input [7:0] Data,
-    input Clk,
-    input Divider,
-    input Load,
-    output reg [1:0] Pixel
-    );
+	input [7:0] Data,
+	input Clk,
+	input Divider,
+	input Load,
+	output reg [1:0] Pixel
+);
 
 	reg [7:0] pixelData;
 	reg [1:0] offset;

@@ -24,6 +24,6 @@ module AlphaSwitch(
     output [7:0] AData
     );
 	 
-	 assign AData = Inv ? ~Data : Data;
+	 assign AData = Inv ? 8'd255 ^ Data : Data;
 	 
 endmodule

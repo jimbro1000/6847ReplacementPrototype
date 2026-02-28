@@ -7,6 +7,7 @@ reg AnS;
 reg Clk; 
 reg Css; 
 reg [7:0] Data; 
+reg [7:0] AlphaRowData;
 reg Format;
 reg [2:0] GM;
 reg InE; 
@@ -20,6 +21,7 @@ wire OutputFormat;
 wire RPn;
 wire [8:0] RGB;
 wire tclk;
+wire AlphaRow;
 
 ProtoVDG u_protovdg (.*);
 
