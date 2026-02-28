@@ -26,21 +26,19 @@ module Semi4Rom(
    output reg [3:0] SColour
 );
 
-	reg [7:0] semiData[0:3];
 	reg [1:0] index;
-	
-	initial begin
-		semiData[0] = 8'b11111111;
-		semiData[1] = 8'b11110000;
-		semiData[2] = 8'b00001111;
-		semiData[3] = 8'b00000000;
-	end
 	
 	always @(negedge Clk) begin
 		if (Row == 4'd0)
-			SData <= semiData[Data[3:2]];
+			index <= Data[3:2];
 		if (Row == 4'd6)
-			SData <= semiData[Data[1:0]];
+			index <= Data[1:0];
 		SColour <= ({1'b0,Data[6:4]}) + 4'd1;
+		case (index)
+			2'd0: SData <= 8'b11111111;
+			2'd1: SData <= 8'b11110000;
+			2'd2: SData <= 8'b00001111;
+			default: SData <= 8'b00000000;
+		endcase
 	end
 endmodule

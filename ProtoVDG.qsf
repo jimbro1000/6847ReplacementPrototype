@@ -71,7 +71,7 @@ set_global_assignment -name EDA_DESIGN_ENTRY_SYNTHESIS_TOOL "Design Compiler"
 
 # Fitter Assignments
 # ==================
-set_global_assignment -name DEVICE "EPM7256SQC208-10"
+set_global_assignment -name DEVICE "EPM7128SLC84-10"
 set_global_assignment -name ERROR_CHECK_FREQUENCY_DIVISOR "-1"
 set_global_assignment -name OPTIMIZE_HOLD_TIMING OFF
 set_global_assignment -name OPTIMIZE_MULTI_CORNER_TIMING OFF
@@ -165,3 +165,47 @@ set_global_assignment -name VERILOG_FILE BorderSelect.v
 set_global_assignment -name MIN_CORE_JUNCTION_TEMP 0
 set_global_assignment -name MAX_CORE_JUNCTION_TEMP 85
 set_global_assignment -name VERILOG_FILE FontDef.v
+set_global_assignment -name DEVICE_FILTER_PACKAGE PLCC
+set_global_assignment -name DEVICE_FILTER_PIN_COUNT 84
+set_location_assignment PIN_34 -to AlphaRow[3]
+set_location_assignment PIN_36 -to AlphaRow[2]
+set_location_assignment PIN_35 -to AlphaRow[1]
+set_location_assignment PIN_37 -to AlphaRow[0]
+set_location_assignment PIN_27 -to AlphaRowData[7]
+set_location_assignment PIN_24 -to AlphaRowData[6]
+set_location_assignment PIN_22 -to AlphaRowData[5]
+set_location_assignment PIN_21 -to AlphaRowData[4]
+set_location_assignment PIN_17 -to AlphaRowData[3]
+set_location_assignment PIN_18 -to AlphaRowData[2]
+set_location_assignment PIN_20 -to AlphaRowData[1]
+set_location_assignment PIN_25 -to AlphaRowData[0]
+set_location_assignment PIN_16 -to AnG
+set_location_assignment PIN_15 -to Css
+set_location_assignment PIN_12 -to Data[7]
+set_location_assignment PIN_80 -to Inv
+set_location_assignment PIN_10 -to Data[5]
+set_location_assignment PIN_9 -to Data[4]
+set_location_assignment PIN_8 -to Data[3]
+set_location_assignment PIN_11 -to Data[6]
+set_location_assignment PIN_6 -to Data[2]
+set_location_assignment PIN_5 -to Data[1]
+set_location_assignment PIN_4 -to Data[0]
+set_location_assignment PIN_29 -to GM[0]
+set_location_assignment PIN_30 -to GM[1]
+set_location_assignment PIN_31 -to GM[2]
+set_location_assignment PIN_33 -to Clk
+set_location_assignment PIN_44 -to RGB[2]
+set_location_assignment PIN_45 -to RGB[1]
+set_location_assignment PIN_46 -to RGB[0]
+set_location_assignment PIN_50 -to RGB[5]
+set_location_assignment PIN_51 -to RGB[4]
+set_location_assignment PIN_52 -to RGB[3]
+set_location_assignment PIN_56 -to RGB[8]
+set_location_assignment PIN_57 -to RGB[7]
+set_location_assignment PIN_58 -to RGB[6]
+set_location_assignment PIN_63 -to OutputFormat
+set_location_assignment PIN_64 -to Format
+set_location_assignment PIN_75 -to FSn
+set_location_assignment PIN_76 -to HSn
+set_location_assignment PIN_77 -to DA0
+set_location_assignment PIN_83 -to GClk

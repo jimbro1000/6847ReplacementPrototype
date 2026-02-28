@@ -20,19 +20,19 @@
 //////////////////////////////////////////////////////////////////////////////////
 module ColourMux(
 	input clk,
-   input [3:0] Colour1,
-   input Sel1,
-   input [3:0] Colour2,
-   input Sel2,
-   input [3:0] Colour3,
+	input [3:0] Colour1,
+	input Sel1,
+	input [3:0] Colour2,
+	input Sel2,
+	input [3:0] Colour3,
 	input backporch,
 	input viewportActive,
 	input [3:0] Colour4,
-   output reg [8:0] RGB
+	output reg [8:0] RGB
 );
 
 	wire [3:0] Colour;
-	
+
 	// backporch must return full black (default case)
 	// viewport active multiplexes graphic input (alpha, semi, graphic)
 	// sel1 = colour1
@@ -40,7 +40,7 @@ module ColourMux(
 	// !sel1 & !sel2 = colour3
 	// anything else must be a border
 	assign Colour = backporch ? 4'b1111 : viewportActive ? Sel1 ? Colour1 : Sel2 ? Colour2 : Colour3 : Colour4;
-	
+
 	always @(clk) begin
 		case (Colour)
 			4'b0000:
@@ -73,4 +73,5 @@ module ColourMux(
 				RGB = 9'b000000000; // backporch black
 		endcase
 	end
+
 endmodule
